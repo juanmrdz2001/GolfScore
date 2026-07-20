@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="theme-color"
+    content="#0f5132"
+  >
+
+  <title>Nueva partida</title>
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <div class="app paginaNuevaPartida">
+
+    <!-- ENCABEZADO -->
+
+    <header class="encabezadoApp">
+
+      <div>
+        <p class="nombreClub">
+          Golf Score
+        </p>
+
+        <h1>
+          ⛳ Nueva partida
+        </h1>
+      </div>
+
+      <a
+        href="index.html"
+        class="btnRegresar"
+        aria-label="Regresar al inicio"
+      >
+        ←
+      </a>
+
+    </header>
+
+
+    <form id="formularioNuevaPartida">
+
+      <!-- INFORMACIÓN GENERAL -->
+
+      <section class="tarjetaConfiguracionPartida">
+
+        <div class="tituloSeccionPartida">
+          <span>Información general</span>
+          <h2>Datos de la ronda</h2>
+        </div>
+
+
+        <div class="grupoFormulario">
+
+          <label for="nombrePartida">
+            Nombre de la partida
+          </label>
+
+          <input
+            id="nombrePartida"
+            type="text"
+            placeholder="Ejemplo: Ronda del domingo"
+            maxlength="80"
+            required
+          >
+
+        </div>
+
+
+        <div class="filaFormularioDoble">
+
+          <div class="grupoFormulario">
+
+            <label for="fechaPartida">
+              Fecha
+            </label>
+
+            <input
+              id="fechaPartida"
+              type="date"
+              required
+            >
+
+          </div>
+
+
+          <div class="grupoFormulario">
+
+            <label for="horaPartida">
+              Hora
+            </label>
+
+            <input
+              id="horaPartida"
+              type="time"
+              required
+            >
+
+          </div>
+
+        </div>
+
+
+        <div class="grupoFormulario">
+
+          <label for="clubPartida">
+            Club
+          </label>
+
+          <select
+            id="clubPartida"
+            required
+          >
+            <option value="">
+              Selecciona un club
+            </option>
+          </select>
+
+        </div>
+
+
+        <div class="grupoFormulario">
+
+          <label for="campoPartida">
+            Campo
+          </label>
+
+          <select
+            id="campoPartida"
+            disabled
+            required
+          >
+            <option value="">
+              Primero selecciona un club
+            </option>
+          </select>
+
+        </div>
+
+
+        <div class="grupoFormulario">
+
+          <label>
+            Número de hoyos
+          </label>
+
+          <div class="selectorCantidadHoyos">
+
+            <label class="opcionCantidadHoyos">
+
+              <input
+                type="radio"
+                name="cantidadHoyos"
+                value="9"
+              >
+
+              <span>
+                <strong>9</strong>
+                <small>Hoyos</small>
+              </span>
+
+            </label>
+
+
+            <label class="opcionCantidadHoyos">
+
+              <input
+                type="radio"
+                name="cantidadHoyos"
+                value="18"
+                checked
+              >
+
+              <span>
+                <strong>18</strong>
+                <small>Hoyos</small>
+              </span>
+
+            </label>
+
+          </div>
+
+        </div>
+
+
+        <div
+          id="grupoRecorrido9Hoyos"
+          class="grupoFormulario oculto"
+        >
+
+          <label for="recorridoPartida">
+            Recorrido
+          </label>
+
+          <select id="recorridoPartida">
+
+            <option value="ida">
+              Primera vuelta · Hoyos 1 al 9
+            </option>
+
+            <option value="vuelta">
+              Segunda vuelta · Hoyos 10 al 18
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div
+          id="resumenCampoPartida"
+          class="resumenCampoPartida oculto"
+        >
+
+          <div>
+            <span>Hoyos configurados</span>
+            <strong id="hoyosConfiguradosPartida">0</strong>
+          </div>
+
+          <div>
+            <span>Par total</span>
+            <strong id="parCampoPartida">0</strong>
+          </div>
+
+          <div>
+            <span>Salidas</span>
+            <strong id="salidasCampoPartida">0</strong>
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- SELECCIÓN DE JUGADORES -->
+
+      <section class="tarjetaConfiguracionPartida">
+
+        <div class="encabezadoJugadoresPartida">
+
+          <div class="tituloSeccionPartida">
+            <span>Participantes</span>
+            <h2>Seleccionar jugadores</h2>
+          </div>
+
+          <div class="contadorSeleccionados">
+            <strong id="cantidadJugadoresSeleccionados">
+              0
+            </strong>
+
+            <span>/ 6</span>
+          </div>
+
+        </div>
+
+
+        <div class="grupoFormulario">
+
+          <label for="buscarJugadorPartida">
+            Buscar jugador
+          </label>
+
+          <div class="campoBusqueda">
+
+            <span>🔎</span>
+
+            <input
+              id="buscarJugadorPartida"
+              type="search"
+              placeholder="Nombre o alias"
+              autocomplete="off"
+            >
+
+          </div>
+
+        </div>
+
+
+        <div
+          id="listaJugadoresPartida"
+          class="listaJugadoresPartida"
+        >
+        </div>
+
+
+        <div
+          id="mensajeSinJugadoresPartida"
+          class="mensajePartidaVacio oculto"
+        >
+          No hay jugadores activos disponibles.
+        </div>
+
+      </section>
+
+
+      <!-- JUGADORES ELEGIDOS -->
+
+      <section
+        id="seccionJugadoresElegidos"
+        class="tarjetaConfiguracionPartida oculto"
+      >
+
+        <div class="tituloSeccionPartida">
+          <span>Configuración individual</span>
+          <h2>Jugadores de la ronda</h2>
+        </div>
+
+        <p class="explicacionPartida">
+          Puedes cambiar la salida preferida de cada jugador
+          solamente para esta partida.
+        </p>
+
+
+        <div
+          id="listaJugadoresElegidos"
+          class="listaJugadoresElegidos"
+        >
+        </div>
+
+      </section>
+
+
+      <!-- OBSERVACIONES -->
+
+      <section class="tarjetaConfiguracionPartida">
+
+        <div class="grupoFormulario">
+
+          <label for="observacionesPartida">
+            Observaciones
+
+            <span class="campoOpcional">
+              Opcional
+            </span>
+          </label>
+
+          <textarea
+            id="observacionesPartida"
+            rows="3"
+            maxlength="300"
+            placeholder="Comentarios de la ronda"
+          ></textarea>
+
+        </div>
+
+      </section>
+
+
+      <!-- MENSAJE ERROR -->
+
+      <p
+        id="mensajeErrorPartida"
+        class="mensajeError oculto"
+      ></p>
+
+
+      <!-- RESUMEN FINAL -->
+
+      <section class="resumenFinalPartida">
+
+        <div>
+          <span>Club y campo</span>
+
+          <strong id="resumenClubCampoPartida">
+            Sin seleccionar
+          </strong>
+        </div>
+
+        <div>
+          <span>Jugadores</span>
+
+          <strong id="resumenJugadoresPartida">
+            0 seleccionados
+          </strong>
+        </div>
+
+        <div>
+          <span>Recorrido</span>
+
+          <strong id="resumenRecorridoPartida">
+            18 hoyos
+          </strong>
+        </div>
+
+      </section>
+
+
+      <button
+        id="btnCrearPartida"
+        class="btnCrearPartida"
+        type="submit"
+      >
+        ⛳ Crear y comenzar partida
+      </button>
+
+    </form>
+
+  </div>
+
+
+  <!-- MODAL DE CONFIRMACIÓN -->
+
+  <div
+    id="modalPartidaCreada"
+    class="modal oculto"
+  >
+
+    <div class="contenidoModal">
+
+      <div class="iconoModal">
+        ✅
+      </div>
+
+      <h2>
+        Partida creada
+      </h2>
+
+      <p>
+        La ronda quedó preparada correctamente.
+      </p>
+
+      <button
+        id="btnIrMarcador"
+        class="btnPrincipal"
+        type="button"
+      >
+        Ir al marcador
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <div
+    id="notificacionPartida"
+    class="notificacion oculto"
+  ></div>
+
+
+  <script src="./js/club.js"></script>
+  <script src="./js/jugadores.js"></script>
+  <script src="./js/partida.js"></script>
+
+</body>
+</html>

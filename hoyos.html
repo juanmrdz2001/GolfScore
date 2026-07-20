@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="theme-color"
+    content="#0f5132"
+  >
+
+  <title>Configuración de hoyos</title>
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <div class="app paginaHoyos">
+
+    <!-- ENCABEZADO -->
+
+    <header class="encabezadoApp">
+
+      <div>
+        <p class="nombreClub">
+          Configuración del campo
+        </p>
+
+        <h1 id="tituloPaginaHoyos">
+          🕳️ Hoyos
+        </h1>
+      </div>
+
+      <a
+        href="administrar-club.html"
+        class="btnRegresar"
+        aria-label="Regresar"
+      >
+        ←
+      </a>
+
+    </header>
+
+
+    <!-- INFORMACIÓN DEL CLUB Y CAMPO -->
+
+    <section class="resumenClubAdministrado">
+
+      <div>
+        <span>Club</span>
+
+        <strong id="nombreClubHoyos">
+          -
+        </strong>
+      </div>
+
+      <div>
+        <span>Campo</span>
+
+        <strong id="nombreCampoHoyos">
+          -
+        </strong>
+      </div>
+
+    </section>
+
+
+    <!-- AVANCE DE CONFIGURACIÓN -->
+
+    <section class="resumenConfiguracionHoyos">
+
+      <div>
+        <span>Configurados</span>
+
+        <strong>
+          <span id="hoyosConfigurados">0</span>
+          /
+          <span id="cantidadTotalHoyos">18</span>
+        </strong>
+      </div>
+
+      <div>
+        <span>Par total</span>
+
+        <strong id="parTotalCampo">
+          0
+        </strong>
+      </div>
+
+      <div>
+        <span>Salidas</span>
+
+        <strong id="cantidadSalidasHoyos">
+          0
+        </strong>
+      </div>
+
+    </section>
+
+
+    <!-- SELECTOR DE HOYOS -->
+
+    <section class="selectorHoyosConfiguracion">
+
+      <div class="encabezadoSelectorHoyos">
+
+        <div>
+          <span>Selecciona</span>
+          <h2>Hoyo a configurar</h2>
+        </div>
+
+        <strong id="indicadorHoyoActual">
+          Hoyo 1
+        </strong>
+
+      </div>
+
+      <div
+        id="listaBotonesHoyos"
+        class="listaBotonesHoyos"
+      >
+        <!-- Se generan desde JavaScript -->
+      </div>
+
+    </section>
+
+
+    <!-- FORMULARIO DEL HOYO -->
+
+    <main class="tarjetaConfiguracionHoyo">
+
+      <form id="formularioHoyo">
+
+        <input
+          id="numeroHoyoConfigurado"
+          type="hidden"
+          value="1"
+        >
+
+
+        <div class="encabezadoFormularioHoyo">
+
+          <div class="numeroGrandeHoyo">
+            <span>Hoyo</span>
+
+            <strong id="numeroHoyoVisible">
+              1
+            </strong>
+          </div>
+
+
+          <div class="grupoParHoyo">
+
+            <label for="parHoyoInput">
+              Par
+            </label>
+
+            <select
+              id="parHoyoInput"
+              required
+            >
+              <option value="">Seleccionar</option>
+              <option value="3">Par 3</option>
+              <option value="4">Par 4</option>
+              <option value="5">Par 5</option>
+              <option value="6">Par 6</option>
+            </select>
+
+          </div>
+
+        </div>
+
+
+        <!-- DATOS POR SALIDA -->
+
+        <section class="seccionDatosSalidasHoyo">
+
+          <div class="tituloDatosSalidas">
+
+            <div>
+              <span>Información por salida</span>
+              <h2>Distancia y ventaja</h2>
+            </div>
+
+          </div>
+
+
+          <div
+            id="contenedorSalidasHoyo"
+            class="contenedorSalidasHoyo"
+          >
+            <!-- Se genera desde JavaScript -->
+          </div>
+
+
+          <div
+            id="mensajeSinSalidasHoyo"
+            class="mensajeSinSalidasHoyo oculto"
+          >
+            <p>
+              ⚠️ Primero debes registrar las salidas del campo.
+            </p>
+
+            <a
+              href="salidas.html"
+              class="btnIrSalidas"
+            >
+              Registrar salidas
+            </a>
+          </div>
+
+        </section>
+
+
+        <p
+          id="mensajeErrorHoyo"
+          class="mensajeError oculto"
+        ></p>
+
+
+        <!-- NAVEGACIÓN Y GUARDADO -->
+
+        <div class="accionesHoyo">
+
+          <button
+            id="btnHoyoAnteriorConfiguracion"
+            class="btnSecundario"
+            type="button"
+          >
+            ← Anterior
+          </button>
+
+          <button
+            id="btnGuardarHoyo"
+            class="btnPrincipal"
+            type="submit"
+          >
+            💾 Guardar hoyo
+          </button>
+
+          <button
+            id="btnHoyoSiguienteConfiguracion"
+            class="btnSecundario"
+            type="button"
+          >
+            Siguiente →
+          </button>
+
+        </div>
+
+      </form>
+
+    </main>
+
+
+    <!-- RESUMEN DE HOYOS -->
+
+    <section class="resumenHoyosGuardados">
+
+      <div class="encabezadoResumenHoyos">
+
+        <div>
+          <span>Tarjeta del campo</span>
+          <h2>Hoyos guardados</h2>
+        </div>
+
+      </div>
+
+      <div
+        id="tablaResumenHoyos"
+        class="tablaResumenHoyos"
+      >
+        <!-- Se genera desde JavaScript -->
+      </div>
+
+    </section>
+
+  </div>
+
+
+  <!-- NOTIFICACIÓN -->
+
+  <div
+    id="notificacionHoyo"
+    class="notificacion oculto"
+  ></div>
+
+
+  <script src="./js/club.js"></script>
+  <script src="./js/hoyos.js"></script>
+
+</body>
+</html>

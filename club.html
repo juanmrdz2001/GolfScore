@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="theme-color"
+    content="#0f5132"
+  >
+
+  <title>Administración de clubes</title>
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <div class="app paginaClubes">
+
+    <!-- =========================================
+         ENCABEZADO
+    ========================================== -->
+
+    <header class="encabezadoApp">
+
+      <div>
+        <p class="nombreClub">
+          Configuración
+        </p>
+
+        <h1>
+          ⛳ Clubes
+        </h1>
+      </div>
+
+      <a
+        href="index.html"
+        class="btnRegresar"
+        aria-label="Regresar a la partida"
+      >
+        ←
+      </a>
+
+    </header>
+
+
+    <!-- =========================================
+         BOTÓN NUEVO CLUB
+    ========================================== -->
+
+    <section class="accionesClubes">
+
+      <button
+        id="btnNuevoClub"
+        class="btnNuevoClub"
+        type="button"
+      >
+        ＋ Registrar club
+      </button>
+
+    </section>
+
+
+    <!-- =========================================
+         BUSCADOR
+    ========================================== -->
+
+    <section class="buscadorClubes">
+
+      <label for="buscarClub">
+        Buscar club
+      </label>
+
+      <div class="campoBusqueda">
+
+        <span>
+          🔎
+        </span>
+
+        <input
+          id="buscarClub"
+          type="search"
+          placeholder="Nombre, ciudad o estado"
+          autocomplete="off"
+        >
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================================
+         CONTADOR
+    ========================================== -->
+
+    <section class="resumenClubes">
+
+      <div>
+        <span>Clubes registrados</span>
+
+        <strong id="cantidadClubes">
+          0
+        </strong>
+      </div>
+
+      <div>
+        <span>Clubes activos</span>
+
+        <strong id="cantidadClubesActivos">
+          0
+        </strong>
+      </div>
+
+    </section>
+
+
+    <!-- =========================================
+         LISTADO DE CLUBES
+    ========================================== -->
+
+    <main class="contenidoClubes">
+
+      <div
+        id="listaClubes"
+        class="listaClubes"
+      >
+        <!-- Los clubes se crearán desde club.js -->
+      </div>
+
+
+      <!-- MENSAJE CUANDO NO HAY CLUBES -->
+
+      <section
+        id="mensajeSinClubes"
+        class="mensajeSinRegistros"
+      >
+
+        <div class="iconoSinRegistros">
+          ⛳
+        </div>
+
+        <h2>
+          No hay clubes registrados
+        </h2>
+
+        <p>
+          Registra el primer club para comenzar a configurar
+          sus campos, salidas y hoyos.
+        </p>
+
+        <button
+          id="btnPrimerClub"
+          class="btnPrincipal"
+          type="button"
+        >
+          Registrar primer club
+        </button>
+
+      </section>
+
+    </main>
+
+  </div>
+
+
+  <!-- =========================================
+       MODAL REGISTRAR / EDITAR CLUB
+  ========================================== -->
+
+  <div
+    id="modalClub"
+    class="modal oculto"
+  >
+
+    <div class="contenidoModal contenidoModalFormulario">
+
+      <div class="encabezadoModal">
+
+        <div>
+          <p class="subtituloModal">
+            Administración
+          </p>
+
+          <h2 id="tituloModalClub">
+            Registrar club
+          </h2>
+        </div>
+
+        <button
+          id="btnCerrarModalClub"
+          class="btnCerrarModal"
+          type="button"
+          aria-label="Cerrar"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <form id="formularioClub">
+
+        <input
+          id="clubId"
+          type="hidden"
+        >
+
+
+        <!-- NOMBRE -->
+
+        <div class="grupoFormulario">
+
+          <label for="nombreClub">
+            Nombre del club
+          </label>
+
+          <input
+            id="nombreClub"
+            name="nombreClub"
+            type="text"
+            placeholder="Ejemplo: Club Campestre Saltillo"
+            maxlength="100"
+            autocomplete="organization"
+            required
+          >
+
+        </div>
+
+
+        <!-- CIUDAD -->
+
+        <div class="grupoFormulario">
+
+          <label for="ciudadClub">
+            Ciudad
+          </label>
+
+          <input
+            id="ciudadClub"
+            name="ciudadClub"
+            type="text"
+            placeholder="Ejemplo: Saltillo"
+            maxlength="60"
+            autocomplete="address-level2"
+            required
+          >
+
+        </div>
+
+
+        <!-- ESTADO -->
+
+        <div class="grupoFormulario">
+
+          <label for="estadoClub">
+            Estado
+          </label>
+
+          <input
+            id="estadoClub"
+            name="estadoClub"
+            type="text"
+            placeholder="Ejemplo: Coahuila"
+            maxlength="60"
+            autocomplete="address-level1"
+            required
+          >
+
+        </div>
+
+
+        <!-- PAÍS -->
+
+        <div class="grupoFormulario">
+
+          <label for="paisClub">
+            País
+          </label>
+
+          <input
+            id="paisClub"
+            name="paisClub"
+            type="text"
+            value="México"
+            placeholder="País"
+            maxlength="60"
+            autocomplete="country-name"
+            required
+          >
+
+        </div>
+
+
+        <!-- TELÉFONO -->
+
+        <div class="grupoFormulario">
+
+          <label for="telefonoClub">
+            Teléfono
+
+            <span class="campoOpcional">
+              Opcional
+            </span>
+          </label>
+
+          <input
+            id="telefonoClub"
+            name="telefonoClub"
+            type="tel"
+            placeholder="Ejemplo: 844 000 0000"
+            maxlength="25"
+            autocomplete="tel"
+          >
+
+        </div>
+
+
+        <!-- DIRECCIÓN -->
+
+        <div class="grupoFormulario">
+
+          <label for="direccionClub">
+            Dirección
+
+            <span class="campoOpcional">
+              Opcional
+            </span>
+          </label>
+
+          <textarea
+            id="direccionClub"
+            name="direccionClub"
+            rows="3"
+            maxlength="200"
+            placeholder="Dirección del club"
+            autocomplete="street-address"
+          ></textarea>
+
+        </div>
+
+
+        <!-- ESTADO ACTIVO -->
+
+        <label class="controlActivo">
+
+          <input
+            id="clubActivo"
+            type="checkbox"
+            checked
+          >
+
+          <span class="interruptor"></span>
+
+          <span class="textoControlActivo">
+            Club activo
+          </span>
+
+        </label>
+
+
+        <!-- MENSAJE DE ERROR -->
+
+        <p
+          id="mensajeErrorClub"
+          class="mensajeError oculto"
+        >
+        </p>
+
+
+        <!-- BOTONES -->
+
+        <div class="accionesFormulario">
+
+          <button
+            id="btnCancelarClub"
+            class="btnSecundario"
+            type="button"
+          >
+            Cancelar
+          </button>
+
+          <button
+            id="btnGuardarClub"
+            class="btnPrincipal"
+            type="submit"
+          >
+            💾 Guardar club
+          </button>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================================
+       MODAL ELIMINAR CLUB
+  ========================================== -->
+
+  <div
+    id="modalEliminarClub"
+    class="modal oculto"
+  >
+
+    <div class="contenidoModal">
+
+      <div class="iconoModal iconoAdvertencia">
+        ⚠️
+      </div>
+
+      <h2>
+        Eliminar club
+      </h2>
+
+      <p>
+        ¿Seguro que deseas eliminar
+        <strong id="nombreClubEliminar"></strong>?
+      </p>
+
+      <p class="advertenciaEliminar">
+        También se eliminarán sus campos, salidas y hoyos.
+      </p>
+
+      <div class="accionesFormulario">
+
+        <button
+          id="btnCancelarEliminarClub"
+          class="btnSecundario"
+          type="button"
+        >
+          Cancelar
+        </button>
+
+        <button
+          id="btnConfirmarEliminarClub"
+          class="btnPeligro"
+          type="button"
+        >
+          Eliminar
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================================
+       AVISO FLOTANTE
+  ========================================== -->
+
+  <div
+    id="notificacionClub"
+    class="notificacion oculto"
+  >
+    Club guardado correctamente.
+  </div>
+
+
+  <!-- Primero se carga club.js -->
+  <script src="/js/club.js"></script>
+
+</body>
+</html>

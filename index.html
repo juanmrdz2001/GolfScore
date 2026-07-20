@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+  />
+
+  <meta
+    name="theme-color"
+    content="#0f5132"
+  />
+
+  <title>Golf Score</title>
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+  <div class="app">
+
+    <!-- ENCABEZADO -->
+    <header class="encabezadoApp">
+
+      <div>
+       <p  id="nombreClubMarcador"
+         class="nombreClub"
+        >
+          Sin partida activa
+        </p>
+
+        <h1 id="tituloMarcador">
+           ⛳ Golf Score
+        </h1>
+        
+      </div>
+
+      <button
+        id="btnMenu"
+        class="btnMenu"
+        type="button"
+        aria-label="Abrir menú"
+      >
+        ☰
+      </button>
+
+    </header>
+
+<!-- MENÚ DESPLEGABLE -->
+
+<div
+  id="fondoMenu"
+  class="fondoMenu oculto"
+></div>
+
+<nav
+  id="menuDesplegable"
+  class="menuDesplegable"
+  aria-hidden="true"
+>
+
+  <div class="encabezadoMenu">
+
+    <div>
+      <span class="subtituloMenu">Golf Score</span>
+      <h2>Menú principal</h2>
+    </div>
+
+    <button
+      id="btnCerrarMenu"
+      class="btnCerrarMenu"
+      type="button"
+      aria-label="Cerrar menú"
+    >
+      ×
+    </button>
+
+  </div>
+
+  <div class="contenidoMenu">
+
+    <a
+      href="index.html"
+      class="opcionMenu opcionMenuActiva"
+    >
+      <span class="iconoOpcionMenu">🏠</span>
+
+      <span class="textoOpcionMenu">
+        <strong>Inicio</strong>
+        <small>Marcador de la partida</small>
+      </span>
+    </a>
+
+    <a
+      href="club.html"
+      class="opcionMenu"
+    >
+      <span class="iconoOpcionMenu">⛳</span>
+
+      <span class="textoOpcionMenu">
+        <strong>Clubes</strong>
+        <small>Registrar clubes y campos</small>
+      </span>
+    </a>
+
+    <a
+      href="jugadores.html"
+      class="opcionMenu"
+    >
+      <span class="iconoOpcionMenu">🏌️</span>
+
+      <span class="textoOpcionMenu">
+        <strong>Jugadores</strong>
+        <small>Administrar jugadores</small>
+      </span>
+    </a>
+
+    <a
+      href="partida.html"
+      class="opcionMenu"
+    >
+      <span class="iconoOpcionMenu">➕</span>
+
+      <span class="textoOpcionMenu">
+        <strong>Nueva partida</strong>
+        <small>Configurar una ronda</small>
+      </span>
+    </a>
+
+    <a
+      href="partidas.html"
+      class="opcionMenu"
+    >
+      <span class="iconoOpcionMenu">📋</span>
+
+      <span class="textoOpcionMenu">
+        <strong>Partidas guardadas</strong>
+        <small>Consultar rondas anteriores</small>
+      </span>
+    </a>
+
+    <a
+      href="estadisticas.html"
+      class="opcionMenu"
+    >
+      <span class="iconoOpcionMenu">📊</span>
+
+      <span class="textoOpcionMenu">
+        <strong>Estadísticas</strong>
+        <small>Resultados y récords</small>
+      </span>
+    </a>
+
+    <a
+      href="configuracion.html"
+      class="opcionMenu"
+    >
+      <span class="iconoOpcionMenu">⚙️</span>
+
+      <span class="textoOpcionMenu">
+        <strong>Configuración</strong>
+        <small>Preferencias de la aplicación</small>
+      </span>
+    </a>
+
+  </div>
+
+  <div class="pieMenu">
+    <span>⛳ Golf Score</span>
+    <small>Versión inicial</small>
+  </div>
+
+</nav>
+
+    <!-- INFORMACIÓN DEL HOYO -->
+    <section class="tarjetaHoyo">
+
+      <div class="navegacionHoyo">
+
+        <button
+          id="btnHoyoAnterior"
+          class="btnNavegacion"
+          type="button"
+          aria-label="Hoyo anterior"
+        >
+          ‹
+        </button>
+
+        <div class="tituloHoyo">
+
+          <span class="etiquetaHoyo">
+            Hoyo
+          </span>
+
+          <strong id="numeroHoyo">
+            1
+          </strong>
+
+          <span id="totalHoyos">
+            de 18
+          </span>
+
+        </div>
+
+        <button
+          id="btnHoyoSiguiente"
+          class="btnNavegacion"
+          type="button"
+          aria-label="Hoyo siguiente"
+        >
+          ›
+        </button>
+
+      </div>
+
+
+      <div class="datosHoyo">
+
+        <div class="datoHoyo">
+          <span>Par</span>
+          <strong id="parHoyo">4</strong>
+        </div>
+
+        <div class="datoHoyo">
+          <span>Ventaja</span>
+          <strong id="ventajaHoyo">7</strong>
+        </div>
+
+        <div class="datoHoyo">
+          <span>Salida</span>
+          <strong id="salidaHoyo">Blancas</strong>
+        </div>
+
+        <div class="datoHoyo">
+          <span>Distancia</span>
+          <strong>
+            <span id="distanciaHoyo">385</span>
+            yd
+          </strong>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- PROGRESO DE HOYOS -->
+    <section class="progresoHoyos">
+
+      <div
+        id="listaHoyos"
+        class="listaHoyos"
+      >
+        <!-- Los 18 botones se crearán desde JavaScript -->
+      </div>
+
+    </section>
+
+
+    <!-- TABLA DE JUGADORES -->
+    <main class="contenidoPrincipal">
+
+      <section class="tarjetaJugadores">
+
+        <div class="encabezadosJugadores">
+
+          <span class="columnaJugador">
+            Jugador
+          </span>
+
+          <span>
+            Hoyo
+          </span>
+
+          <span>
+            Ida
+          </span>
+
+          <span>
+            Vuelta
+          </span>
+
+          <span>
+            Total
+          </span>
+
+        </div>
+
+
+        <div
+          id="listaJugadores"
+          class="listaJugadores"
+        >
+
+        </div>
+
+      </section>
+
+
+      <!-- JUGADOR SELECCIONADO -->
+      <section class="jugadorActivo">
+
+        <div>
+          <span>Capturando score de:</span>
+
+          <strong id="nombreJugadorActivo">
+          </strong>
+        </div>
+
+        <div class="scoreCapturado">
+          <span>Golpes</span>
+
+          <strong id="numeroCapturado">
+            -
+          </strong>
+        </div>
+
+      </section>
+
+    </main>
+
+
+    <!-- TECLADO NUMÉRICO -->
+    <section class="contenedorTeclado">
+
+      <div
+        id="tecladoNumerico"
+        class="tecladoNumerico"
+      >
+
+        <button
+          class="tecla"
+          type="button"
+          data-numero="1"
+        >
+          1
+        </button>
+
+        <button
+          class="tecla"
+          type="button"
+          data-numero="2"
+        >
+          2
+        </button>
+
+        <button
+          class="tecla"
+          type="button"
+          data-numero="3"
+        >
+          3
+        </button>
+
+        <button
+          class="tecla"
+          type="button"
+          data-numero="4"
+        >
+          4
+        </button>
+
+        <button
+          class="tecla"
+          type="button"
+          data-numero="5"
+        >
+          5
+        </button>
+
+        <button
+          class="tecla"
+          type="button"
+          data-numero="6"
+        >
+          6
+        </button>
+
+        <button
+          class="tecla"
+          type="button"
+          data-numero="7"
+        >
+          7
+        </button>
+
+        <button
+          class="tecla"
+          type="button"
+          data-numero="8"
+        >
+          8
+        </button>
+
+        <button
+          class="tecla"
+          type="button"
+          data-numero="9"
+        >
+          9
+        </button>
+
+        <button
+          id="btnBorrar"
+          class="tecla teclaAccion"
+          type="button"
+        >
+          ⌫
+        </button>
+
+        <button
+          class="tecla"
+          type="button"
+          data-numero="0"
+        >
+          0
+        </button>
+
+        <button
+          id="btnConfirmar"
+          class="tecla teclaConfirmar"
+          type="button"
+        >
+          ✓
+        </button>
+
+      </div>
+
+<div class="accionesPartida">
+
+  <button
+    id="btnFinalizarPartida"
+    class="btnFinalizarPartida"
+    type="button"
+  >
+    🏁 Finalizar
+  </button>
+
+  <button
+    id="btnGuardarPartida"
+    class="btnGuardarPartida"
+    type="button"
+  >
+    💾 Guardar
+  </button>
+
+</div>
+
+    </section>
+
+  </div>
+
+
+  <!-- MODAL DE PARTIDA GUARDADA -->
+  <div
+    id="modalGuardado"
+    class="modal oculto"
+  >
+
+    <div class="contenidoModal">
+
+      <div class="iconoModal">
+        ✅
+      </div>
+
+      <h2>
+        Partida guardada
+      </h2>
+
+      <p>
+        Los resultados quedaron registrados correctamente.
+      </p>
+
+      <button
+        id="btnCerrarModal"
+        class="btnPrincipal"
+        type="button"
+      >
+        Aceptar
+      </button>
+
+    </div>
+
+  </div>
+
+  <!-- Primero se carga club.js -->
+<script src="./js/script.js"></script>
+
+
+
+</body>
+</html>

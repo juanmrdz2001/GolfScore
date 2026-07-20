@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="theme-color"
+    content="#0f5132"
+  >
+
+  <title>Partidas guardadas</title>
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <div class="app paginaPartidas">
+
+    <!-- ENCABEZADO -->
+
+    <header class="encabezadoApp">
+
+      <div>
+        <p class="nombreClub">
+          Golf Score
+        </p>
+
+        <h1>
+          📋 Partidas guardadas
+        </h1>
+      </div>
+
+      <a
+        href="index.html"
+        class="btnRegresar"
+        aria-label="Regresar al marcador"
+      >
+        ←
+      </a>
+
+    </header>
+
+
+    <!-- RESUMEN -->
+
+    <section class="resumenPartidas">
+
+      <article class="tarjetaResumenPartida">
+        <span>Total</span>
+        <strong id="totalPartidas">0</strong>
+      </article>
+
+      <article class="tarjetaResumenPartida">
+        <span>En curso</span>
+        <strong id="partidasEnCurso">0</strong>
+      </article>
+
+      <article class="tarjetaResumenPartida">
+        <span>Finalizadas</span>
+        <strong id="partidasFinalizadas">0</strong>
+      </article>
+
+    </section>
+
+
+    <!-- BUSCADOR Y FILTROS -->
+
+    <section class="panelFiltrosPartidas">
+
+      <div class="campoBusqueda">
+
+        <span>🔎</span>
+
+        <input
+          id="buscarPartida"
+          type="search"
+          placeholder="Buscar por nombre, club o campo"
+          autocomplete="off"
+        >
+
+      </div>
+
+
+      <div class="filtrosEstadoPartida">
+
+        <button
+          class="btnFiltroPartida activo"
+          type="button"
+          data-estado="todas"
+        >
+          Todas
+        </button>
+
+        <button
+          class="btnFiltroPartida"
+          type="button"
+          data-estado="en_curso"
+        >
+          En curso
+        </button>
+
+        <button
+          class="btnFiltroPartida"
+          type="button"
+          data-estado="finalizada"
+        >
+          Finalizadas
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- LISTA -->
+
+    <main>
+
+      <section
+        id="listaPartidas"
+        class="listaPartidas"
+      >
+      </section>
+
+
+      <section
+        id="mensajeSinPartidas"
+        class="mensajeSinPartidas oculto"
+      >
+
+        <div class="iconoSinPartidas">
+          ⛳
+        </div>
+
+        <h2>
+          No hay partidas guardadas
+        </h2>
+
+        <p>
+          Crea una nueva partida para comenzar
+          a registrar los resultados.
+        </p>
+
+        <a
+          href="partida.html"
+          class="btnNuevaPartidaVacia"
+        >
+          ➕ Crear nueva partida
+        </a>
+
+      </section>
+
+    </main>
+
+
+    <!-- BOTÓN NUEVA PARTIDA -->
+
+    <a
+      href="partida.html"
+      class="btnFlotanteNuevaPartida"
+      aria-label="Crear nueva partida"
+    >
+      +
+    </a>
+
+  </div>
+
+
+  <!-- MODAL ELIMINAR -->
+
+  <div
+    id="modalEliminarPartida"
+    class="modal oculto"
+  >
+
+    <div class="contenidoModal">
+
+      <div class="iconoModal">
+        🗑️
+      </div>
+
+      <h2>
+        Eliminar partida
+      </h2>
+
+      <p id="mensajeEliminarPartida">
+        ¿Deseas eliminar esta partida?
+      </p>
+
+      <div class="accionesModalPartida">
+
+        <button
+          id="btnCancelarEliminarPartida"
+          class="btnSecundario"
+          type="button"
+        >
+          Cancelar
+        </button>
+
+        <button
+          id="btnConfirmarEliminarPartida"
+          class="btnEliminar"
+          type="button"
+        >
+          Eliminar
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- NOTIFICACIÓN -->
+
+  <div
+    id="notificacionPartidas"
+    class="notificacion oculto"
+  ></div>
+
+<!-- MODAL DETALLE DE PARTIDA -->
+
+<div
+  id="modalDetallePartida"
+  class="modal oculto"
+>
+
+  <div class="contenidoModal detallePartidaModal">
+
+    <div class="encabezadoDetallePartida">
+
+      <div>
+        <span class="subtituloDetallePartida">
+          Resultados
+        </span>
+
+        <h2 id="tituloDetallePartida">
+          Detalle de la partida
+        </h2>
+
+        <p id="campoDetallePartida">
+          Club · Campo
+        </p>
+      </div>
+
+      <button
+        id="btnCerrarDetallePartida"
+        class="btnCerrarDetallePartida"
+        type="button"
+        aria-label="Cerrar detalle"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="datosGeneralesDetalle">
+
+      <div>
+        <span>Fecha</span>
+        <strong id="fechaDetallePartida">-</strong>
+      </div>
+
+      <div>
+        <span>Estado</span>
+        <strong id="estadoDetallePartida">-</strong>
+      </div>
+
+      <div>
+        <span>Hoyos</span>
+        <strong id="hoyosDetallePartida">-</strong>
+      </div>
+
+      <div>
+        <span>Progreso</span>
+        <strong id="progresoDetallePartida">-</strong>
+      </div>
+
+      
+
+    </div>
+
+
+    <div class="contenedorTablaDetallePartida">
+
+      <table class="tablaDetallePartida">
+
+        <thead id="encabezadoTablaDetallePartida">
+        </thead>
+
+        <tbody id="cuerpoTablaDetallePartida">
+        </tbody>
+
+      </table>
+
+    </div>
+
+    <div class="accionesDetallePartida">
+
+  <button
+    id="btnCompartirDetallePartida"
+    class="btnCompartirDetallePartida"
+    type="button"
+  >
+    📤 Compartir detalle
+  </button>
+
+  <button
+    id="btnCerrarDetalleInferior"
+    class="btnPrincipal btnCerrarDetalleInferior"
+    type="button"
+  >
+    Cerrar
+  </button>
+
+</div>
+
+  </div>
+
+</div>
+
+  <script src="./js/partidas.js"></script>
+
+</body>
+</html>

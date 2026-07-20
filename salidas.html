@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="theme-color"
+    content="#0f5132"
+  >
+
+  <title>Salidas del campo</title>
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <div class="app paginaSalidas">
+
+    <header class="encabezadoApp">
+
+      <div>
+        <p class="nombreClub">
+          Configuración del campo
+        </p>
+
+        <h1 id="nombreCampoSalidas">
+          🚩 Salidas
+        </h1>
+      </div>
+
+      <a
+        href="administrar-club.html"
+        class="btnRegresar"
+        aria-label="Regresar"
+      >
+        ←
+      </a>
+
+    </header>
+
+
+    <!-- INFORMACIÓN DEL CLUB Y CAMPO -->
+
+    <section class="resumenClubAdministrado">
+
+      <div>
+        <span>Club</span>
+
+        <strong id="nombreClubSalidas">
+          -
+        </strong>
+      </div>
+
+      <div>
+        <span>Campo</span>
+
+        <strong id="campoSeleccionadoSalidas">
+          -
+        </strong>
+      </div>
+
+    </section>
+
+
+    <!-- BOTÓN NUEVA SALIDA -->
+
+    <section class="accionesClubes">
+
+      <button
+        id="btnNuevaSalida"
+        class="btnNuevoClub"
+        type="button"
+      >
+        ＋ Registrar salida
+      </button>
+
+    </section>
+
+
+    <!-- LISTADO DE SALIDAS -->
+
+    <main>
+
+      <div
+        id="listaSalidas"
+        class="listaSalidas"
+      >
+      </div>
+
+
+      <section
+        id="mensajeSinSalidas"
+        class="mensajeSinRegistros"
+      >
+
+        <div class="iconoSinRegistros">
+          🚩
+        </div>
+
+        <h2>
+          No hay salidas registradas
+        </h2>
+
+        <p>
+          Registra las salidas disponibles del campo.
+        </p>
+
+        <button
+          id="btnPrimeraSalida"
+          class="btnPrincipal"
+          type="button"
+        >
+          Registrar primera salida
+        </button>
+
+      </section>
+
+    </main>
+
+  </div>
+
+
+  <!-- MODAL REGISTRAR SALIDA -->
+
+  <div
+    id="modalSalida"
+    class="modal oculto"
+  >
+
+    <div class="contenidoModal contenidoModalFormulario">
+
+      <div class="encabezadoModal">
+
+        <div>
+          <p class="subtituloModal">
+            Configuración
+          </p>
+
+          <h2 id="tituloModalSalida">
+            Registrar salida
+          </h2>
+        </div>
+
+        <button
+          id="btnCerrarModalSalida"
+          class="btnCerrarModal"
+          type="button"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <form id="formularioSalida">
+
+        <input
+          id="salidaId"
+          type="hidden"
+        >
+
+
+        <div class="grupoFormulario">
+
+          <label for="nombreSalida">
+            Nombre de la salida
+          </label>
+
+          <input
+            id="nombreSalida"
+            type="text"
+            placeholder="Ejemplo: Blancas"
+            maxlength="50"
+            required
+          >
+
+        </div>
+
+
+        <div class="grupoFormulario">
+
+          <label for="colorSalida">
+            Color
+          </label>
+
+          <select
+            id="colorSalida"
+            required
+          >
+            <option value="">Selecciona un color</option>
+            <option value="negra">Negra</option>
+            <option value="azul">Azul</option>
+            <option value="blanca">Blanca</option>
+            <option value="dorada">Dorada</option>
+            <option value="roja">Roja</option>
+            <option value="verde">Verde</option>
+            <option value="amarilla">Amarilla</option>
+            <option value="naranja">Naranja</option>
+          </select>
+
+        </div>
+
+
+        <div class="grupoFormulario">
+
+          <label for="ratingSalida">
+            Course Rating
+          </label>
+
+          <input
+            id="ratingSalida"
+            type="number"
+            min="50"
+            max="90"
+            step="0.1"
+            placeholder="Ejemplo: 70.1"
+            required
+          >
+
+        </div>
+
+
+        <div class="grupoFormulario">
+
+          <label for="slopeSalida">
+            Slope Rating
+          </label>
+
+          <input
+            id="slopeSalida"
+            type="number"
+            min="55"
+            max="155"
+            step="1"
+            placeholder="Ejemplo: 125"
+            required
+          >
+
+        </div>
+
+
+        <div class="grupoFormulario">
+
+          <label for="yardajeTotalSalida">
+            Yardaje total
+          </label>
+
+          <input
+            id="yardajeTotalSalida"
+            type="number"
+            min="1000"
+            max="10000"
+            step="1"
+            placeholder="Ejemplo: 6450"
+          >
+
+        </div>
+
+
+        <label class="controlActivo">
+
+          <input
+            id="salidaActiva"
+            type="checkbox"
+            checked
+          >
+
+          <span class="interruptor"></span>
+
+          <span class="textoControlActivo">
+            Salida activa
+          </span>
+
+        </label>
+
+
+        <p
+          id="mensajeErrorSalida"
+          class="mensajeError oculto"
+        ></p>
+
+
+        <div class="accionesFormulario">
+
+          <button
+            id="btnCancelarSalida"
+            class="btnSecundario"
+            type="button"
+          >
+            Cancelar
+          </button>
+
+          <button
+            class="btnPrincipal"
+            type="submit"
+          >
+            💾 Guardar salida
+          </button>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+
+  <!-- CONFIRMAR ELIMINACIÓN -->
+
+  <div
+    id="modalEliminarSalida"
+    class="modal oculto"
+  >
+
+    <div class="contenidoModal">
+
+      <div class="iconoModal">
+        ⚠️
+      </div>
+
+      <h2>
+        Eliminar salida
+      </h2>
+
+      <p>
+        ¿Seguro que deseas eliminar
+        <strong id="nombreSalidaEliminar"></strong>?
+      </p>
+
+      <div class="accionesFormulario">
+
+        <button
+          id="btnCancelarEliminarSalida"
+          class="btnSecundario"
+          type="button"
+        >
+          Cancelar
+        </button>
+
+        <button
+          id="btnConfirmarEliminarSalida"
+          class="btnPeligro"
+          type="button"
+        >
+          Eliminar
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div
+    id="notificacionSalida"
+    class="notificacion oculto"
+  ></div>
+
+
+  <script src="./js/club.js"></script>
+  <script src="./js/salidas.js"></script>
+
+</body>
+</html>

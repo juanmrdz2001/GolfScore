@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="theme-color"
+    content="#0f5132"
+  >
+
+  <title>Administración de jugadores</title>
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <div class="app paginaJugadores">
+
+    <!-- ENCABEZADO -->
+
+    <header class="encabezadoApp">
+
+      <div>
+        <p class="nombreClub">
+          Administración
+        </p>
+
+        <h1>
+          🏌️ Jugadores
+        </h1>
+      </div>
+
+      <a
+        href="index.html"
+        class="btnRegresar"
+        aria-label="Regresar al inicio"
+      >
+        ←
+      </a>
+
+    </header>
+
+
+    <!-- NUEVO JUGADOR -->
+
+    <section class="accionesClubes">
+
+      <button
+        id="btnNuevoJugador"
+        class="btnNuevoClub"
+        type="button"
+      >
+        ＋ Registrar jugador
+      </button>
+
+    </section>
+
+
+    <!-- BUSCADOR -->
+
+    <section class="buscadorClubes">
+
+      <label for="buscarJugador">
+        Buscar jugador
+      </label>
+
+      <div class="campoBusqueda">
+
+        <span>🔎</span>
+
+        <input
+          id="buscarJugador"
+          type="search"
+          placeholder="Nombre, alias, club o teléfono"
+          autocomplete="off"
+        >
+
+      </div>
+
+    </section>
+
+
+    <!-- CONTADORES -->
+
+    <section class="resumenJugadores">
+
+      <div>
+        <span>Registrados</span>
+        <strong id="cantidadJugadores">0</strong>
+      </div>
+
+      <div>
+        <span>Activos</span>
+        <strong id="cantidadJugadoresActivos">0</strong>
+      </div>
+
+      <div>
+        <span>Hándicap promedio</span>
+        <strong id="handicapPromedio">0.0</strong>
+      </div>
+
+    </section>
+
+
+    <!-- LISTADO -->
+
+    <main class="contenidoJugadores">
+
+      <div
+        id="listaJugadoresRegistrados"
+        class="listaJugadoresRegistrados"
+      >
+      </div>
+
+
+      <section
+        id="mensajeSinJugadores"
+        class="mensajeSinRegistros"
+      >
+
+        <div class="iconoSinRegistros">
+          🏌️
+        </div>
+
+        <h2>
+          No hay jugadores registrados
+        </h2>
+
+        <p>
+          Registra al primer jugador para poder agregarlo
+          posteriormente a una partida.
+        </p>
+
+        <button
+          id="btnPrimerJugador"
+          class="btnPrincipal"
+          type="button"
+        >
+          Registrar primer jugador
+        </button>
+
+      </section>
+
+    </main>
+
+  </div>
+
+
+  <!-- MODAL REGISTRAR / EDITAR JUGADOR -->
+
+  <div
+    id="modalJugador"
+    class="modal oculto"
+  >
+
+    <div class="contenidoModal contenidoModalFormulario">
+
+      <div class="encabezadoModal">
+
+        <div>
+          <p class="subtituloModal">
+            Administración
+          </p>
+
+          <h2 id="tituloModalJugador">
+            Registrar jugador
+          </h2>
+        </div>
+
+        <button
+          id="btnCerrarModalJugador"
+          class="btnCerrarModal"
+          type="button"
+          aria-label="Cerrar"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <form id="formularioJugador">
+
+        <input
+          id="jugadorId"
+          type="hidden"
+        >
+
+
+        <!-- NOMBRE -->
+
+        <div class="grupoFormulario">
+
+          <label for="nombreJugador">
+            Nombre completo
+          </label>
+
+          <input
+            id="nombreJugador"
+            type="text"
+            placeholder="Ejemplo: Juan Manuel Rodríguez"
+            maxlength="100"
+            autocomplete="name"
+            required
+          >
+
+        </div>
+
+
+        <!-- ALIAS -->
+
+        <div class="grupoFormulario">
+
+          <label for="aliasJugador">
+            Alias
+          </label>
+
+          <input
+            id="aliasJugador"
+            type="text"
+            placeholder="Ejemplo: JuanMR"
+            maxlength="20"
+            required
+          >
+
+          <small class="ayudaFormulario">
+            Será el nombre corto que aparecerá en el marcador.
+          </small>
+
+        </div>
+
+
+        <!-- CORREO -->
+
+        <div class="grupoFormulario">
+
+          <label for="correoJugador">
+            Correo electrónico
+
+            <span class="campoOpcional">
+              Opcional
+            </span>
+          </label>
+
+          <input
+            id="correoJugador"
+            type="email"
+            placeholder="jugador@correo.com"
+            maxlength="100"
+            autocomplete="email"
+          >
+
+        </div>
+
+
+        <!-- TELÉFONO -->
+
+        <div class="grupoFormulario">
+
+          <label for="telefonoJugador">
+            Teléfono
+
+            <span class="campoOpcional">
+              Opcional
+            </span>
+          </label>
+
+          <input
+            id="telefonoJugador"
+            type="tel"
+            placeholder="844 000 0000"
+            maxlength="25"
+            autocomplete="tel"
+          >
+
+        </div>
+
+
+        <!-- HÁNDICAP Y CATEGORÍA -->
+
+        <div class="filaFormularioDoble">
+
+          <div class="grupoFormulario">
+
+            <label for="handicapJugador">
+              Hándicap
+            </label>
+
+            <input
+              id="handicapJugador"
+              type="number"
+              min="-10"
+              max="54"
+              step="0.1"
+              placeholder="18.0"
+              inputmode="decimal"
+              required
+            >
+
+          </div>
+
+
+          <div class="grupoFormulario">
+
+            <label for="categoriaJugador">
+              Categoría
+            </label>
+
+            <select
+              id="categoriaJugador"
+              required
+            >
+              <option value="">
+                Seleccionar
+              </option>
+
+              <option value="Campeonato">
+                Campeonato
+              </option>
+
+              <option value="Primera">
+                Primera
+              </option>
+
+              <option value="Segunda">
+                Segunda
+              </option>
+
+              <option value="Tercera">
+                Tercera
+              </option>
+
+              <option value="Senior">
+                Senior
+              </option>
+
+              <option value="Damas">
+                Damas
+              </option>
+
+              <option value="Juvenil">
+                Juvenil
+              </option>
+
+              <option value="Infantil">
+                Infantil
+              </option>
+
+              <option value="Principiante">
+                Principiante
+              </option>
+            </select>
+
+          </div>
+
+        </div>
+
+
+        <!-- CLUB -->
+
+        <div class="grupoFormulario">
+
+          <label for="clubJugador">
+            Club de origen
+          </label>
+
+          <select
+            id="clubJugador"
+            required
+          >
+            <option value="">
+              Selecciona un club
+            </option>
+          </select>
+
+        </div>
+
+
+        <!-- CAMPO -->
+
+        <div class="grupoFormulario">
+
+          <label for="campoJugador">
+            Campo habitual
+          </label>
+
+          <select
+            id="campoJugador"
+            required
+            disabled
+          >
+            <option value="">
+              Primero selecciona un club
+            </option>
+          </select>
+
+        </div>
+
+
+        <!-- SALIDA -->
+
+        <div class="grupoFormulario">
+
+          <label for="salidaPreferidaJugador">
+            Salida preferida
+          </label>
+
+          <select
+            id="salidaPreferidaJugador"
+            required
+            disabled
+          >
+            <option value="">
+              Primero selecciona un campo
+            </option>
+          </select>
+
+        </div>
+
+
+        <!-- ACTIVO -->
+
+        <label class="controlActivo">
+
+          <input
+            id="jugadorActivo"
+            type="checkbox"
+            checked
+          >
+
+          <span class="interruptor"></span>
+
+          <span class="textoControlActivo">
+            Jugador activo
+          </span>
+
+        </label>
+
+
+        <!-- ERROR -->
+
+        <p
+          id="mensajeErrorJugador"
+          class="mensajeError oculto"
+        ></p>
+
+
+        <!-- BOTONES -->
+
+        <div class="accionesFormulario">
+
+          <button
+            id="btnCancelarJugador"
+            class="btnSecundario"
+            type="button"
+          >
+            Cancelar
+          </button>
+
+          <button
+            class="btnPrincipal"
+            type="submit"
+          >
+            💾 Guardar jugador
+          </button>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+
+  <!-- MODAL ELIMINAR -->
+
+  <div
+    id="modalEliminarJugador"
+    class="modal oculto"
+  >
+
+    <div class="contenidoModal">
+
+      <div class="iconoModal iconoAdvertencia">
+        ⚠️
+      </div>
+
+      <h2>
+        Eliminar jugador
+      </h2>
+
+      <p>
+        ¿Seguro que deseas eliminar a
+        <strong id="nombreJugadorEliminar"></strong>?
+      </p>
+
+      <p class="advertenciaEliminar">
+        Las partidas históricas deberán conservar el nombre
+        registrado al momento en que fueron jugadas.
+      </p>
+
+      <div class="accionesFormulario">
+
+        <button
+          id="btnCancelarEliminarJugador"
+          class="btnSecundario"
+          type="button"
+        >
+          Cancelar
+        </button>
+
+        <button
+          id="btnConfirmarEliminarJugador"
+          class="btnPeligro"
+          type="button"
+        >
+          Eliminar
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- NOTIFICACIÓN -->
+
+  <div
+    id="notificacionJugador"
+    class="notificacion oculto"
+  ></div>
+
+
+  <script src="./js/club.js"></script>
+  <script src="./js/jugadores.js"></script>
+
+</body>
+</html>

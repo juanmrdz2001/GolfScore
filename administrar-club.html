@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="theme-color"
+    content="#0f5132"
+  >
+
+  <title>Administrar club</title>
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <div class="app paginaAdministrarClub">
+
+    <header class="encabezadoApp">
+
+      <div>
+        <p class="nombreClub">
+          Administración del club
+        </p>
+
+        <h1 id="nombreClubAdministrado">
+          ⛳ Club
+        </h1>
+      </div>
+
+      <a
+        href="club.html"
+        class="btnRegresar"
+        aria-label="Regresar a clubes"
+      >
+        ←
+      </a>
+
+    </header>
+
+
+    <!-- RESUMEN DEL CLUB -->
+
+    <section class="resumenClubAdministrado">
+
+      <div>
+        <span>Ciudad</span>
+        <strong id="ciudadClubAdministrado">-</strong>
+      </div>
+
+      <div>
+        <span>Estado</span>
+        <strong id="estadoClubAdministrado">-</strong>
+      </div>
+
+    </section>
+
+
+    <!-- CAMPOS -->
+
+    <section class="seccionAdministracion">
+
+      <div class="encabezadoSeccionAdministracion">
+
+        <div>
+          <span>Configuración</span>
+          <h2>Campos del club</h2>
+        </div>
+
+        <button
+          id="btnNuevoCampo"
+          class="btnAgregarRegistro"
+          type="button"
+        >
+          ＋ Campo
+        </button>
+
+      </div>
+
+      <div
+        id="listaCampos"
+        class="listaCampos"
+      >
+      </div>
+
+      <div
+        id="mensajeSinCampos"
+        class="mensajeSinRegistros"
+      >
+        <div class="iconoSinRegistros">🏌️</div>
+
+        <h2>No hay campos registrados</h2>
+
+        <p>
+          Registra el primer campo para después configurar
+          sus salidas y hoyos.
+        </p>
+
+        <button
+          id="btnPrimerCampo"
+          class="btnPrincipal"
+          type="button"
+        >
+          Registrar primer campo
+        </button>
+      </div>
+
+    </section>
+
+  </div>
+
+
+  <!-- MODAL CAMPO -->
+
+  <div
+    id="modalCampo"
+    class="modal oculto"
+  >
+
+    <div class="contenidoModal contenidoModalFormulario">
+
+      <div class="encabezadoModal">
+
+        <div>
+          <p class="subtituloModal">
+            Configuración
+          </p>
+
+          <h2 id="tituloModalCampo">
+            Registrar campo
+          </h2>
+        </div>
+
+        <button
+          id="btnCerrarModalCampo"
+          class="btnCerrarModal"
+          type="button"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <form id="formularioCampo">
+
+        <input
+          id="campoId"
+          type="hidden"
+        >
+
+
+        <div class="grupoFormulario">
+
+          <label for="nombreCampo">
+            Nombre del campo
+          </label>
+
+          <input
+            id="nombreCampo"
+            type="text"
+            placeholder="Ejemplo: Campo Principal"
+            maxlength="80"
+            required
+          >
+
+        </div>
+
+
+        <div class="grupoFormulario">
+
+          <label for="totalHoyosCampo">
+            Número de hoyos
+          </label>
+
+          <select
+            id="totalHoyosCampo"
+            required
+          >
+            <option value="9">9 hoyos</option>
+            <option value="18" selected>18 hoyos</option>
+          </select>
+
+        </div>
+
+
+        <div class="grupoFormulario">
+
+          <label for="descripcionCampo">
+            Descripción
+            <span class="campoOpcional">Opcional</span>
+          </label>
+
+          <textarea
+            id="descripcionCampo"
+            rows="3"
+            maxlength="200"
+            placeholder="Información adicional del campo"
+          ></textarea>
+
+        </div>
+
+
+        <label class="controlActivo">
+
+          <input
+            id="campoActivo"
+            type="checkbox"
+            checked
+          >
+
+          <span class="interruptor"></span>
+
+          <span class="textoControlActivo">
+            Campo activo
+          </span>
+
+        </label>
+
+
+        <p
+          id="mensajeErrorCampo"
+          class="mensajeError oculto"
+        ></p>
+
+
+        <div class="accionesFormulario">
+
+          <button
+            id="btnCancelarCampo"
+            class="btnSecundario"
+            type="button"
+          >
+            Cancelar
+          </button>
+
+          <button
+            class="btnPrincipal"
+            type="submit"
+          >
+            💾 Guardar campo
+          </button>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+
+  <div
+    id="notificacionCampo"
+    class="notificacion oculto"
+  ></div>
+
+
+  <script src="./js/club.js"></script>
+  <script src="./js/administrar-club.js"></script>
+
+</body>
+</html>
