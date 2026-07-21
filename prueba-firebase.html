@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Prueba Firebase</title>
+</head>
+
+<body>
+
+  <h1>Prueba de Firebase</h1>
+
+  <button id="btnProbarFirebase">
+    Probar conexión
+  </button>
+
+  <p id="resultadoFirebase">
+    Sin probar
+  </p>
+
+
+  <script type="module">
+
+    import {
+      probarFirebase,
+      obtenerPruebas
+    } from "./js/firestore.js";
+
+
+    const boton = document.getElementById(
+      "btnProbarFirebase"
+    );
+
+    const resultado = document.getElementById(
+      "resultadoFirebase"
+    );
+
+
+    boton.addEventListener(
+      "click",
+      async () => {
+        resultado.textContent =
+          "Conectando...";
+
+        const conectado =
+          await probarFirebase();
+
+        if (!conectado) {
+          resultado.textContent =
+            "❌ No se pudo conectar";
+
+          return;
+        }
+
+        const pruebas =
+          await obtenerPruebas();
+
+        resultado.textContent =
+          `✅ Conectado. Registros: ${pruebas.length}`;
+      }
+    );
+
+  </script>
+
+</body>
+</html>
