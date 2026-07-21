@@ -1,3 +1,5 @@
+import { obtenerClubesDB, guardarClubDB, eliminarClubDB } from "./database.js";
+
 const CLAVE_CLUBES = "golfScoreClubes";
 
 function obtenerClubes() {
@@ -17,6 +19,48 @@ function obtenerClubes() {
 
 function guardarClubes(clubes) {
   localStorage.setItem(CLAVE_CLUBES, JSON.stringify(clubes));
+
+  guardarClubesEnFirebase(clubes);
+}
+
+async function guardarClubesEnFirebase(clubes) {
+  try {
+    for (const club of clubes) {
+      await guardarClubDB(club);
+    }
+
+    console.log("Clubes respaldados en Firebase.");
+  } catch (error) {
+    console.error("No se pudieron guardar los clubes en Firebase:", error);
+  }
+}
+
+async function cargarClubesDesdeFirebase() {
+  try {
+    const clubesFirebase = await obtenerClubesDB();
+
+    if (Array.isArray(clubesFirebase) && clubesFirebase.length > 0) {
+      localStorage.setItem(CLAVE_CLUBES, JSON.stringify(clubesFirebase));
+
+      console.log("Clubes cargados desde Firebase.");
+
+      return true;
+    }
+
+    const clubesLocales = obtenerClubes();
+
+    if (clubesLocales.length > 0) {
+      await guardarClubesEnFirebase(clubesLocales);
+
+      console.log("Clubes locales enviados a Firebase.");
+    }
+
+    return true;
+  } catch (error) {
+    console.error("No se pudieron cargar los clubes desde Firebase:", error);
+
+    return false;
+  }
 }
 
 function crearId(prefijo = "registro") {
@@ -40,31 +84,6 @@ function registrarClub(datosClub) {
   guardarClubes(clubes);
 
   return nuevoClub;
-}
-
-function agregarCampoAClub(clubId, datosCampo) {
-  const clubes = obtenerClubes();
-
-  const club = clubes.find((clubActual) => clubActual.id === clubId);
-
-  if (!club) {
-    throw new Error("No se encontró el club.");
-  }
-
-  const nuevoCampo = {
-    id: crearId("campo"),
-    nombre: datosCampo.nombre.trim(),
-    totalHoyos: Number(datosCampo.totalHoyos),
-    parTotal: 0,
-    activo: true,
-    salidas: [],
-    hoyos: [],
-  };
-
-  club.campos.push(nuevoCampo);
-  guardarClubes(clubes);
-
-  return nuevoCampo;
 }
 
 function agregarCampoAClub(clubId, datosCampo) {
@@ -548,7 +567,7 @@ function cerrarModalEliminarClub() {
   clubPendienteEliminarId = null;
 }
 
-function eliminarClubConfirmado() {
+async function eliminarClubConfirmado() {
   if (!clubPendienteEliminarId) {
     return;
   }
@@ -559,7 +578,17 @@ function eliminarClubConfirmado() {
     (club) => club.id !== clubPendienteEliminarId,
   );
 
-  guardarClubes(clubesActualizados);
+  localStorage.setItem(CLAVE_CLUBES, JSON.stringify(clubesActualizados));
+
+  try {
+    await eliminarClubDB(clubPendienteEliminarId);
+  } catch (error) {
+    console.error("No se pudo eliminar el club en Firebase:", error);
+
+    mostrarNotificacion(
+      "El club se eliminó localmente, pero hubo un problema con Firebase.",
+    );
+  }
 
   cerrarModalEliminarClub();
 
@@ -698,6 +727,8 @@ if (modalEliminarClub) {
    INICIAR PÁGINA
 ===================================================== */
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
+  await cargarClubesDesdeFirebase();
+
   mostrarClubes();
 });
